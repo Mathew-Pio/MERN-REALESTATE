@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 
 const generateToken = user => {
     return jwt.sign(
-        {id:user._id},
+        { id:user._id },
         process.env.JWT_SECRET_KEY,
         { expiresIn: '4d' }
     )
@@ -46,7 +46,7 @@ export const login = async(req, res) => {
         }
         const token = generateToken(user);
         const { password, ...rest } = user._doc;
-        return res.status(200).json({success:true, message:'login successful', token: token, data:user._doc});
+        return res.status(200).json({success:true, message:'login successful', token: token, data:rest});
     }catch(err){
         return res.status(500).json({success:false, message:'login failed'})
     }
