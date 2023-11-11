@@ -13,6 +13,7 @@ export const isAuth = (req, res, next) => {
         const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
 
         req.userId = decodedToken.id;
+        req.user = decodedToken.user;
         next();
     }catch(err){
         if(err.name === 'TokenExpiredError'){

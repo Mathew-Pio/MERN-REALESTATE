@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 
 const generateToken = user => {
     return jwt.sign(
-        { id:user._id },
+        { id:user._id, user:user },
         process.env.JWT_SECRET_KEY,
         { expiresIn: '4d' }
     )

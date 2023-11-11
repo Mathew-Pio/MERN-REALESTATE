@@ -39,6 +39,7 @@ export default function Signin() {
         type:'LOGIN_SUCCESS',
         payload:{
           id: data.data._id,
+          user: data.user,
           token: data.token
         }
       })

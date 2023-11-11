@@ -2,6 +2,7 @@ import { useContext, useEffect, useReducer, createContext } from "react";
 
 const initialState = {
     id: null,
+    user: null,
     token:null
 }
 
@@ -12,12 +13,14 @@ const authReducer = (state, action) => {
         case 'LOGIN_START':
         return {
             id: null,
+            user: null,
             token:null
         };
 
         case 'LOGIN_SUCCESS':
         return {
             id:action.payload.id,
+            user: action.payload.user,
             token: action.payload.token
         }
 
