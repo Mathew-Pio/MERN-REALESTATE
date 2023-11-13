@@ -1,11 +1,13 @@
 import React from 'react'
 import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
 import { app } from '../firebase'
-import { useState, useContext } from 'react'
+import { useContext } from 'react'
 import {authContext} from '../../context/AuthContext.jsx'
+import {useNavigate} from 'react-router-dom';
 
 export default function OAuth() {
   const {dispatch} = useContext(authContext)
+  const navigate = useNavigate();
     const handleGoogleClick = async () => {
         try{
             const provider = new GoogleAuthProvider();
@@ -29,6 +31,7 @@ export default function OAuth() {
                 token: data.token
               }
             })
+            navigate('/');
             console.log(data, 'login data');
         }catch(error){
             console.error('could not sign in with google', error)
