@@ -27,7 +27,7 @@ export default function OAuth() {
               type:'LOGIN_SUCCESS',
               payload:{
                 id: data.data._id,
-                user: data.user,
+                user: data.data,
                 token: data.token
               }
             })

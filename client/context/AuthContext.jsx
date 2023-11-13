@@ -22,7 +22,7 @@ const authReducer = (state, action) => {
             id:action.payload.id,
             user: action.payload.user,
             token: action.payload.token
-        }
+        } 
 
         case 'LOGOUT':
         return {
@@ -37,7 +37,7 @@ const authReducer = (state, action) => {
 
 export const AuthContextProvider = ({children}) => {
     const [state, dispatch] = useReducer(authReducer, initialState)
-    return <authContext.Provider value={{id:state.id, token:state.token, dispatch}}>
+    return <authContext.Provider value={{id:state.id, user: state.user, token:state.token, dispatch}}>
         {children}
     </authContext.Provider>
 }

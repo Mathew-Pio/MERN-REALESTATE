@@ -1,7 +1,12 @@
 import React from 'react'
+import { useContext } from 'react'
 import {FaSearch} from 'react-icons/fa'
 import {Link} from 'react-router-dom'
+import { authContext } from '../../context/AuthContext'
+
 export default function Headers() {
+  const { user } = useContext(authContext)
+
   return (
     <header className='bg-slate-200 shadow-md'>
         <div className='flex justify-between items-center max-w-6xl mx-auto p-3'>
@@ -22,8 +27,12 @@ export default function Headers() {
             <Link to='/about'>
             <li className='hidden sm:inline text-slate-700 hover:underline'>About</li>
             </Link>
-            <Link to='/sign-in'>
-            <li className='text-slate-700 hover:underline'>Sign in</li>
+            <Link to='/profile'>
+            {user ? (
+              <img className='rounded-full h-7 w-7 object-cover' src={user.avatar} alt='profile'/>
+              ) : (
+              <li className='text-slate-700 hover:underline'>Sign in</li> 
+            )}
             </Link>
         </ul>
         </div>
