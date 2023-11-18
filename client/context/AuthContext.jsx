@@ -31,15 +31,23 @@ const authReducer = (state, action) => {
         case 'LOGOUT':
         return {
             id:null,
+            user:null,
             token:null
         }
 
         case 'UPDATE_SUCCESS':
-            return {
-                id: action.payload.id,
-                user: action.payload.user,
-                token: action.payload.token,
-            }
+        return {
+            id: action.payload.id,
+            user: action.payload.user,
+            token: action.payload.token,
+        }
+
+        case 'DELETE_SUCCESS':
+        return {
+            id: null,
+            user: null,
+            token: null
+        }
 
         default:
         return state;

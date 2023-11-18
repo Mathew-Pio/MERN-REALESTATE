@@ -89,6 +89,58 @@ export default function Profile() {
       console.log(error);
     }
   }
+
+    const handleDeleteUser = async (e) => {
+      e.preventDefault();
+      try{
+        setLoading(true);
+      const res = await fetch(`/api/user/${user._id}`, {
+        method: 'DELETE', 
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(formData),
+      })
+      const data = await res.json();
+      console.log(data);
+      if(data.success === false){
+        setLoading(false);
+        setError(data.message);
+        return;
+      }
+      dispatch({
+        type:'DELETE_SUCCESS',
+        payload:{
+          id: null,
+          user: null,
+          token: null
+        }
+      })
+      setLoading(false);
+      setError(null);
+      }catch(error){
+        setLoading(false);
+        setError(error);
+        console.log(error);
+      }
+    }
+
+    const logout = async (e) => {
+      e.preventDefault();
+
+      dispatch({
+        type:'LOGOUT',
+        payload:{
+          id: null,
+          user: null,
+          token: null
+        }
+      })
+      // Clear the token from local storage
+      localStorage.removeItem('token');
+
+    }
+
   return (
     <div className='p-3 max-w-lg mx-auto'>
       <h1 className='text-3xl font-semibold text-center my-7'>Profile</h1>
@@ -117,8 +169,8 @@ export default function Profile() {
         <button disabled={loading} className='bg-slate-700 text-white rounded-lg p-3 hover:opacity-50 disabled:placeholder-opacity-80'>{loading ? 'Loading...': 'Update' }</button>
       </form>
       <div className='flex justify-between mt-5'>
-        <span className='text-red-700 cursor-pointer'>Delete account</span>
-        <span className='text-red-700 cursor-pointer'>Sign out</span>
+        <span onClick={handleDeleteUser} className='text-red-700 cursor-pointer'>Delete account</span>
+        <span onClick={logout} className='text-red-700 cursor-pointer'>Sign out</span>
       </div>
       <p className='text-red-700 mt-5'>
         {error ? error : ''}

@@ -28,7 +28,7 @@ export const signup = async (req, res) => {
        await newUser.save();
        return res.status(201).json({success:true, message:'User created successfully', data: newUser})
     }catch(err){
-        return res.status(500).json({success:false, message:"Failed to create user"})
+        return res.status(500).json({err, success:false, message:"Failed to create user"})
     }
 }
 
@@ -48,7 +48,7 @@ export const login = async(req, res) => {
         const { password, ...rest } = user._doc;
         return res.status(200).json({success:true, message:'login successful', token: token, data:rest});
     }catch(err){
-        return res.status(500).json({success:false, message:'login failed'})
+        return res.status(500).json({err, success:false, message:'login failed'})
     }
 }
 
@@ -79,6 +79,6 @@ export const google = async (req, res) => {
             return res.status(200).json({success: true, message: 'login is successful', token: token, data: rest})
         }
     }catch(err){
-        return res.status(500).json({success:false, message:"Failed to create user"})
+        return res.status(500).json({err, success:false, message:"Failed to create user"})
     }
 }
