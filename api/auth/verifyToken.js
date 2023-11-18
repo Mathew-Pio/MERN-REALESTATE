@@ -22,3 +22,13 @@ export const isAuth = (req, res, next) => {
         return res.status(401).json({success: false, message:'Invalid Token'})
     }
 }
+
+export const isUser = (req, res, next) => {
+    isAuth(req, res, () => {
+        if(req.userId === req.params.id){
+            next();
+        }else{
+            return res.status(403).json({sucess:false, message:'you are not authorized'});
+        }
+    })
+}
