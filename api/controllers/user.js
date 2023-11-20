@@ -1,4 +1,5 @@
 import User from '../models/User.js';
+import Listing from '../models/Listing.js';
 import bcrypt from 'bcrypt';
 
 export const updateUser = async (req, res) => {
@@ -30,3 +31,16 @@ export const deleteUser = async (req, res) => {
         return res.status(500).json({err, success: false, message:'Failed to delete user'})
     }
 }
+
+export const getUserListings = async (req, res) => {
+    const id = req.params.id;
+    try{
+        const listings = await Listing.find({ userRef:id });
+        return res.status(200).json({success:true, message:'User listings found', data:listings})
+    }catch(err){
+        return res.status(500).json({err, success: false, message:'Failed to find user listings'})
+    }
+} 
+
+
+
