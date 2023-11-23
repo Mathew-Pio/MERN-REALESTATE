@@ -185,15 +185,15 @@ export default function CreateListing() {
         </div>
         <div className='flex flex-wrap gap-6'>
           <div className='flex items-center gap-2'>
-            <input onChange={handleChange} checked={formData.bedrooms} type='number' id='bedrooms' className='p-3 border border-gray-300 rounded-lg' min='1' required />
+            <input onChange={handleChange} value={formData.bedrooms} type='number' id='bedrooms' className='p-3 border border-gray-300 rounded-lg' min='1' required />
             <p>Beds</p>
           </div>
           <div className='flex items-center gap-2'>
-            <input onChange={handleChange} checked={formData.bathrooms} type='number' id='bathrooms' className='p-3 border border-gray-300 rounded-lg' min='1' required />
+            <input onChange={handleChange} value={formData.bathrooms} type='number' id='bathrooms' className='p-3 border border-gray-300 rounded-lg' min='1' required />
             <p>Baths</p>
           </div>
           <div className='flex items-center gap-2'>
-            <input onChange={handleChange} checked={formData.regularPrice} type='number' id='regularPrice' className='p-3 border border-gray-300 rounded-lg' min='50' required />
+            <input onChange={handleChange} value={formData.regularPrice} type='number' id='regularPrice' className='p-3 border border-gray-300 rounded-lg' min='50' required />
             <div className='flex flex-col items-center'>
               <p>Regular Price</p>
               <span className="text-xs">($ / Month)</span>
