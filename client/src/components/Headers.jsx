@@ -1,11 +1,29 @@
-import React from 'react'
+import {useEffect, useState} from 'react'
 import { useContext } from 'react'
 import {FaSearch} from 'react-icons/fa'
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import { authContext } from '../../context/AuthContext'
 
 export default function Headers() {
   const { user } = useContext(authContext)
+  const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const urlParams = new URLSearchParams(window.location.search);
+    urlParams.set('searchTerm', searchTerm);
+    const searchQuery = urlParams.toString();
+    navigate(`/search?${searchQuery}`);
+  }
+
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(location.search);
+    const searchTermFromUrl = urlParams.get('searchTerm');
+    if(searchTermFromUrl){
+      setSearchTerm(searchTermFromUrl)
+    }
+  }, [location.search]);
 
   return (
     <header className='bg-slate-200 shadow-md'>
@@ -16,9 +34,11 @@ export default function Headers() {
             <span className='text-slate-700'>Estate</span>
         </h1>
         </Link>
-        <form className='bg-slate-100 p-3 rounded-lg flex items-center'>
-            <input type='text' placeholder='search...' className='bg-transparent focus:outline-none w-24 sm:w-64'></input>
+        <form onSubmit={handleSubmit} className='bg-slate-100 p-3 rounded-lg flex items-center'>
+            <input value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} type='text' placeholder='search...' className='bg-transparent focus:outline-none w-24 sm:w-64'></input>
+            <button>
             <FaSearch className='text-slate-600' />
+            </button>
         </form>
         <ul className='flex gap-6'>
             <Link to='/'>
