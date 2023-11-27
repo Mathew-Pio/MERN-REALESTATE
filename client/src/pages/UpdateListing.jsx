@@ -201,7 +201,7 @@ export default function CreateListing() {
           </div>
           {formData.offer && (
           <div className='flex items-center gap-4'>
-            <input onChange={handleChange} checked={formData.discountPrice} type='number' id='discountPrice' className='p-3 border border-gray-300 rounded-lg' min='0' required />
+            <input onChange={handleChange} value={formData.discountPrice} type='number' id='discountPrice' className='p-3 border border-gray-300 rounded-lg' min='0' required />
             <div className='flex flex-col items-center'>
               <p>Discount Price</p>
               <span className='text-xs'>($ / month)</span>
