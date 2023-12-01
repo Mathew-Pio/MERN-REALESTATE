@@ -138,6 +138,13 @@ export default function Home() {
           )
         }
         </div>
+
+      {/* Lets get started */}
+      <div className='flex flex-col items-center p-3 my-2'>
+        <Link to={'/create-listing'}>
+          <button className="bg-blue-500 text-white p-3 hover:opacity-95 rounded-lg">Let's get started!!</button>
+        </Link>
+      </div>
     </div>
   )
 }
